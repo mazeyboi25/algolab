@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>ALGO/LAB — Algorithm Visualizer</title>
+  <meta name="description" content="Interactive sorting and searching algorithm visualizer with synchronized code, metrics, and step-by-step playback." />
+  <meta name="theme-color" content="#07070a" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="is-loading">
+
+  <!-- INTRO LOADER -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__top">
+      <span>ALGO/LAB</span>
+      <span>INITIALIZING DATASET</span>
+    </div>
+
+    <div class="loader__center">
+      <div class="loader__mark"><span>A</span><span>/</span><span>L</span></div>
+      <p id="loader-status">Preparing visualization engine</p>
+    </div>
+
+    <div class="loader__bottom">
+      <div class="loader__progress">
+        <span id="loader-progress-bar"></span>
+      </div>
+      <span id="loader-percent">000</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header" id="site-header">
+    <a class="brand magnetic" href="#top" aria-label="ALGO/LAB home">
+      <span class="brand__mark">A/L</span>
+      <span class="brand__text">
+        <strong>ALGO/LAB</strong>
+        <small>Algorithm Visualizer</small>
+      </span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="#visualizer"><span>01</span> Visualizer</a>
+      <a href="#algorithms"><span>02</span> Algorithms</a>
+      <a href="#about"><span>03</span> About</a>
+    </nav>
+
+    <div class="header-status">
+      <span class="status-dot"></span>
+      <span>Interactive / Ready</span>
+    </div>
+
+    <button class="menu-button" id="menu-button" type="button" aria-label="Open navigation" aria-controls="mobile-menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <aside class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <nav>
+      <a href="#visualizer"><span>01</span> Visualizer</a>
+      <a href="#algorithms"><span>02</span> Algorithms</a>
+      <a href="#about"><span>03</span> About</a>
+    </nav>
+    <p>WATCH LOGIC MOVE.</p>
+  </aside>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__eyebrow">
+        <span>Computer Science / Interactive Learning</span>
+        <span>2026</span>
+      </div>
+
+      <h1 class="hero__title" id="hero-title">
+        <span class="hero-line"><span>WATCH</span></span>
+        <span class="hero-line hero-line--outline"><span>LOGIC MOVE.</span></span>
+      </h1>
+
+      <div class="hero__footer">
+        <p>
+          Explore sorting and searching algorithms through synchronized motion,
+          code execution, metrics, and step-by-step playback.
+        </p>
+
+        <a class="hero__cta magnetic" href="#visualizer">
+          Launch Visualizer <span>↓</span>
+        </a>
+
+        <div class="hero__index"><span>01</span><span>/</span><span>03</span></div>
+      </div>
+
+      <div class="hero__ambient" aria-hidden="true">
+        <i class="orbit orbit--1"></i>
+        <i class="orbit orbit--2"></i>
+        <i class="orbit orbit--3"></i>
+        <b class="node node--1"></b>
+        <b class="node node--2"></b>
+        <b class="node node--3"></b>
+      </div>
+    </section>
+
+    <!-- VISUALIZER -->
+    <section class="visualizer-section" id="visualizer" aria-labelledby="visualizer-title">
+      <div class="section-index"><span>/ 01</span><span>Visualizer</span></div>
+
+      <div class="visualizer-heading">
+        <div>
+          <p class="kicker">Algorithm Engine</p>
+          <h2 id="visualizer-title">See every<br />operation.</h2>
+        </div>
+        <p>
+          Pause, replay, inspect, and move one operation at a time while the
+          visualization, code, and metrics remain synchronized.
+        </p>
+      </div>
+
+      <div class="lab-shell" id="lab-shell">
+
+        <!-- LEFT PANEL -->
+        <aside class="lab-panel lab-panel--algorithms">
+          <div class="panel-heading"><span>01</span><span>Algorithm</span></div>
+
+          <div class="algorithm-current">
+            <span id="algorithm-category">Sorting</span>
+            <h3 id="algorithm-name">Quick Sort</h3>
+            <p id="algorithm-description">
+              Partitions data around a pivot, then recursively sorts each side.
+            </p>
+          </div>
+
+          <div class="algorithm-group">
+            <p class="algorithm-group__label">Sorting</p>
+            <div class="algorithm-list">
+              <button class="algorithm-option" type="button" data-algorithm="bubble">
+                <span>01</span><strong>Bubble Sort</strong><small>O(n²)</small>
+              </button>
+              <button class="algorithm-option" type="button" data-algorithm="selection">
+                <span>02</span><strong>Selection Sort</strong><small>O(n²)</small>
+              </button>
+              <button class="algorithm-option" type="button" data-algorithm="insertion">
+                <span>03</span><strong>Insertion Sort</strong><small>O(n²)</small>
+              </button>
+              <button class="algorithm-option" type="button" data-algorithm="merge">
+                <span>04</span><strong>Merge Sort</strong><small>O(n log n)</small>
+              </button>
+              <button class="algorithm-option is-active" type="button" data-algorithm="quick" aria-pressed="true">
+                <span>05</span><strong>Quick Sort</strong><small>O(n log n)</small>
+              </button>
+            </div>
+          </div>
+
+          <div class="algorithm-group">
+            <p class="algorithm-group__label">Searching</p>
+            <div class="algorithm-list">
+              <button class="algorithm-option" type="button" data-algorithm="linear-search">
+                <span>06</span><strong>Linear Search</strong><small>O(n)</small>
+              </button>
+              <button class="algorithm-option" type="button" data-algorithm="binary-search">
+                <span>07</span><strong>Binary Search</strong><small>O(log n)</small>
+              </button>
+            </div>
+          </div>
+
+          <div class="complexity-mini">
+            <div><span>Best</span><strong id="complexity-best">O(n log n)</strong></div>
+            <div><span>Average</span><strong id="complexity-average">O(n log n)</strong></div>
+            <div><span>Worst</span><strong id="complexity-worst">O(n²)</strong></div>
+            <div><span>Space</span><strong id="complexity-space">O(log n)</strong></div>
+          </div>
+        </aside>
+
+        <!-- CENTER STAGE -->
+        <section class="lab-stage" aria-label="Algorithm visualization">
+          <div class="stage-toolbar">
+            <div><span class="live-dot"></span><span id="run-state-label">Ready</span></div>
+            <div>
+              <button id="randomize-button" type="button">Randomize</button>
+              <button id="custom-array-button" type="button" aria-controls="custom-array-panel" aria-expanded="false">Custom Data</button>
+            </div>
+          </div>
+
+          <div class="search-target" id="search-target-panel" hidden>
+            <label for="search-target-input">Target value</label>
+            <input id="search-target-input" type="number" min="1" max="99" value="42" />
+            <button id="search-target-apply" type="button">Apply</button>
+          </div>
+
+          <div class="custom-array-panel" id="custom-array-panel" hidden>
+            <label for="custom-array-input">Enter values separated by commas</label>
+            <div>
+              <input id="custom-array-input" type="text" inputmode="numeric" autocomplete="off" placeholder="42, 17, 8, 61, 25, 33" />
+              <button id="custom-array-apply" type="button">Apply</button>
+            </div>
+            <small>Use 4–40 values between 1 and 99.</small>
+          </div>
+
+          <div class="visualizer-canvas">
+            <div class="bar-stage" id="bar-stage" aria-live="polite" aria-label="Array visualization">
+              <!-- script.js will generate the bars here -->
+            </div>
+
+            <div class="operation-indicator" id="operation-indicator" aria-live="polite">
+              <span>Current operation</span>
+              <strong id="operation-title">Ready</strong>
+              <p id="operation-expression">Press play to begin.</p>
+            </div>
+          </div>
+
+          <div class="metrics-grid">
+            <div class="metric"><span>Comparisons</span><strong id="metric-comparisons">0</strong></div>
+            <div class="metric"><span>Swaps</span><strong id="metric-swaps">0</strong></div>
+            <div class="metric"><span>Writes</span><strong id="metric-writes">0</strong></div>
+            <div class="metric"><span>Elapsed</span><strong id="metric-time">0.00s</strong></div>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline__meta">
+              <span id="timeline-current">Step 0</span>
+              <span id="timeline-total">/ 0</span>
+            </div>
+
+            <input id="timeline-range" type="range" min="0" max="0" value="0" step="1" aria-label="Algorithm timeline" />
+
+            <div class="timeline__time">
+              <span id="timeline-time-current">00:00</span>
+              <span id="timeline-time-total">00:00</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- RIGHT PANEL -->
+        <aside class="lab-panel lab-panel--code">
+          <div class="panel-heading"><span>02</span><span>Execution</span></div>
+
+          <div class="execution-state">
+            <span>Current Step</span>
+            <strong id="execution-action">Waiting</strong>
+            <p id="execution-detail">Start the algorithm to inspect each operation.</p>
+          </div>
+
+          <div class="code-view">
+            <div class="code-view__top">
+              <span id="code-file-name">quick-sort.js</span>
+              <span>JavaScript</span>
+            </div>
+
+            <pre class="code-block" id="code-block"><code id="algorithm-code"><span class="code-line" data-line="1"><i>01</i><b>function</b> quickSort(arr, low, high) {</span>
+<span class="code-line" data-line="2"><i>02</i>  <b>if</b> (low &lt; high) {</span>
+<span class="code-line" data-line="3"><i>03</i>    <b>const</b> pivotIndex = partition(arr, low, high);</span>
+<span class="code-line" data-line="4"><i>04</i>    quickSort(arr, low, pivotIndex - 1);</span>
+<span class="code-line" data-line="5"><i>05</i>    quickSort(arr, pivotIndex + 1, high);</span>
+<span class="code-line" data-line="6"><i>06</i>  }</span>
+<span class="code-line" data-line="7"><i>07</i>}</span>
+<span class="code-line" data-line="8"><i>08</i></span>
+<span class="code-line" data-line="9"><i>09</i><b>function</b> partition(arr, low, high) {</span>
+<span class="code-line" data-line="10"><i>10</i>  <b>const</b> pivot = arr[high];</span>
+<span class="code-line" data-line="11"><i>11</i>  <b>let</b> i = low - 1;</span>
+<span class="code-line" data-line="12"><i>12</i>  <b>for</b> (<b>let</b> j = low; j &lt; high; j++) {</span>
+<span class="code-line" data-line="13"><i>13</i>    <b>if</b> (arr[j] &lt; pivot) {</span>
+<span class="code-line" data-line="14"><i>14</i>      i++;</span>
+<span class="code-line" data-line="15"><i>15</i>      swap(arr, i, j);</span>
+<span class="code-line" data-line="16"><i>16</i>    }</span>
+<span class="code-line" data-line="17"><i>17</i>  }</span>
+<span class="code-line" data-line="18"><i>18</i>  swap(arr, i + 1, high);</span>
+<span class="code-line" data-line="19"><i>19</i>  <b>return</b> i + 1;</span>
+<span class="code-line" data-line="20"><i>20</i>}</span></code></pre>
+          </div>
+
+          <div class="active-values">
+            <div><span>Left</span><strong id="active-left">—</strong></div>
+            <div><span>Right</span><strong id="active-right">—</strong></div>
+            <div><span>Pivot</span><strong id="active-pivot">—</strong></div>
+          </div>
+        </aside>
+
+        <!-- CONTROLS -->
+        <div class="control-dock">
+          <div class="control-group">
+            <label for="array-size"><span>Array Size</span><strong id="array-size-value">12</strong></label>
+            <input id="array-size" type="range" min="6" max="40" value="12" step="1" />
+          </div>
+
+          <div class="transport-controls">
+            <button id="step-back-button" type="button" aria-label="Previous step">←</button>
+            <button id="play-button" class="play-button" type="button" aria-label="Play algorithm" aria-pressed="false">
+              <span class="play-icon">▶</span>
+              <span class="pause-icon" hidden>Ⅱ</span>
+            </button>
+            <button id="step-forward-button" type="button" aria-label="Next step">→</button>
+            <button id="reset-button" type="button" aria-label="Reset algorithm">↻</button>
+          </div>
+
+          <div class="control-group">
+            <label for="speed-control"><span>Speed</span><strong id="speed-value">1.0×</strong></label>
+            <input id="speed-control" type="range" min="0.25" max="4" value="1" step="0.25" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ALGORITHM LIBRARY -->
+    <section class="algorithm-library" id="algorithms" aria-labelledby="algorithms-title">
+      <div class="section-index"><span>/ 02</span><span>Algorithms</span></div>
+
+      <div class="library-heading">
+        <div>
+          <p class="kicker">Explore the library</p>
+          <h2 id="algorithms-title">One concept.<br />Many strategies.</h2>
+        </div>
+        <p>Compare complexity, execution behavior, and visual patterns side by side.</p>
+      </div>
+
+      <div class="algorithm-cards">
+        <article class="algorithm-card">
+          <div><span>01</span><span>Sorting</span></div>
+          <h3>Bubble Sort</h3>
+          <p>Repeatedly compares neighboring values and swaps them when needed.</p>
+          <footer><span>Average O(n²)</span><button data-launch-algorithm="bubble">Visualize ↗</button></footer>
+        </article>
+
+        <article class="algorithm-card">
+          <div><span>02</span><span>Sorting</span></div>
+          <h3>Insertion Sort</h3>
+          <p>Builds a sorted section by inserting each value into its correct position.</p>
+          <footer><span>Average O(n²)</span><button data-launch-algorithm="insertion">Visualize ↗</button></footer>
+        </article>
+
+        <article class="algorithm-card algorithm-card--featured">
+          <div><span>03</span><span>Sorting</span></div>
+          <h3>Quick Sort</h3>
+          <p>Partitions the dataset around a pivot and recursively sorts each side.</p>
+          <footer><span>Average O(n log n)</span><button data-launch-algorithm="quick">Visualize ↗</button></footer>
+        </article>
+
+        <article class="algorithm-card">
+          <div><span>04</span><span>Sorting</span></div>
+          <h3>Merge Sort</h3>
+          <p>Splits the dataset into smaller groups and merges them back in order.</p>
+          <footer><span>Average O(n log n)</span><button data-launch-algorithm="merge">Visualize ↗</button></footer>
+        </article>
+
+        <article class="algorithm-card">
+          <div><span>05</span><span>Searching</span></div>
+          <h3>Linear Search</h3>
+          <p>Checks each value from beginning to end until the target is found.</p>
+          <footer><span>Average O(n)</span><button data-launch-algorithm="linear-search">Visualize ↗</button></footer>
+        </article>
+
+        <article class="algorithm-card">
+          <div><span>06</span><span>Searching</span></div>
+          <h3>Binary Search</h3>
+          <p>Repeatedly halves a sorted range to efficiently locate a target value.</p>
+          <footer><span>Average O(log n)</span><button data-launch-algorithm="binary-search">Visualize ↗</button></footer>
+        </article>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about-section" id="about" aria-labelledby="about-title">
+      <div class="section-index"><span>/ 03</span><span>About</span></div>
+
+      <div class="about-grid">
+        <div>
+          <p class="kicker">Built for understanding</p>
+          <h2 id="about-title">Algorithms should<br />be seen, not memorized.</h2>
+          <p>
+            ALGO/LAB separates algorithm logic from visual playback. Every
+            algorithm produces operations that can be paused, replayed, and inspected.
+          </p>
+        </div>
+
+        <div class="architecture-flow">
+          <div><span>01</span><strong>Algorithm</strong><small>Produces operations</small></div>
+          <i>→</i>
+          <div><span>02</span><strong>History</strong><small>Stores every step</small></div>
+          <i>→</i>
+          <div><span>03</span><strong>Player</strong><small>Controls playback</small></div>
+          <i>→</i>
+          <div><span>04</span><strong>Visualizer</strong><small>Turns logic into motion</small></div>
+        </div>
+      </div>
+
+      <div class="feature-strip">
+        <div><span>01</span><strong>Step-by-step</strong><small>Move one operation at a time.</small></div>
+        <div><span>02</span><strong>Synchronized Code</strong><small>See the active line of logic.</small></div>
+        <div><span>03</span><strong>Live Metrics</strong><small>Track comparisons, swaps, and writes.</small></div>
+        <div><span>04</span><strong>Custom Data</strong><small>Test your own datasets.</small></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MOBILE ACTIONS -->
+  <div class="mobile-lab-actions" id="mobile-lab-actions">
+    <button type="button" data-mobile-panel="algorithms">Algorithm</button>
+    <button type="button" data-mobile-panel="dataset">Dataset</button>
+    <button type="button" data-mobile-panel="code">Code</button>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div><strong>ALGO/LAB</strong><span>Interactive Algorithm Visualizer</span></div>
+    <div><span>JavaScript</span><span>Algorithms</span><span>Anime.js</span><span>Lenis</span></div>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+
+  <!-- LIBRARIES -->
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
